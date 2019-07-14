@@ -7,15 +7,24 @@ module.exports = (sequelize, Sequelize) =>{
             type:Sequelize.INTEGER
         },
         name:{
-            type: Sequelize.STRING,
-            notEmpty:true
+            type: Sequelize.STRING(100),
+            validate:{
+                is: ["^[a-z]+$",'i'], 
+                max:100,
+                min:1
+            },
+            allowNull:false,
+            notEmpty:true,
+            
         },
         description:{
             type: Sequelize.TEXT,
         },
        
     },{
-        timestamps:false
+        timestamps:false,
+        tableName: 'department',
+        engine: 'MYISAM'
     })
     
     return department;

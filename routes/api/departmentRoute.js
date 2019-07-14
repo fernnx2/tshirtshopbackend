@@ -1,4 +1,4 @@
-var departmentController = require('../../app/controllers/departmentController');
+var departmentController = require('../../app/resources/departmentResourceController');
 var d = new departmentController(); 
 module.exports = function(app){
     app.get('/department',async (req,res,next)=>{
