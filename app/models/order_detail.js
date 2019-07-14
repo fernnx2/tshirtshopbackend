@@ -27,7 +27,7 @@ module.exports = (sequelize, Sequelize)=>{
             allowNull:false
         },
         unit_cost:{
-            type:Sequelize.DECIMAK(10,2),
+            type:Sequelize.DECIMAL(10,2),
             allowNull:false
         },
     },{

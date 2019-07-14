@@ -23,6 +23,8 @@ module.exports = (sequelize, Sequelize) =>{
        
     },{
         timestamps:false,
+        createdAt:false,
+        updatedAt:false,
         tableName: 'department',
         engine: 'MYISAM'
     })

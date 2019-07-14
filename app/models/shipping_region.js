@@ -11,6 +11,8 @@ module.exports = (sequelize, Sequelize)=>{
         },
     },{
         timestamp:false,
+        createdAt:false,
+        updatedAt:false,
         tableName:'shipping_region',
         engine: 'MYISAM'
     })

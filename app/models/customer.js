@@ -60,6 +60,12 @@ module.exports= (sequelize,Sequelize)=>{
         mob_phone:{
             type:Sequelize.STRING(100),   
         }
-    },{});
+    },{
+        timestamp:false,
+        createdAt:false,
+        updatedAt:false,
+        tableName:'customer',
+        engine: 'MYISAM'
+    });
     return customer;
 }

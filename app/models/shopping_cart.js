@@ -34,6 +34,8 @@ module.exports = (sequelize,Sequelize)=>{
 
     },{
         timestamp:false,
+        createdAt:false,
+        updatedAt:false,
         tableName:'shopping_cart',
         engine: 'MYISAM'
     });

@@ -3,17 +3,17 @@
     "development": {
         "username": "root",
         "password": "secret",
-        "database": "test",
+        "database": "testing",
         "host": "127.0.0.1", 
         "dialect": "mysql"
  
     },
  
     "test": {
-        "username": "",
-        "password": null,
-        "database": "",
-        "host": "",
+        "username": "root",
+        "password": "secret",
+        "database": "testing",
+        "host": "127.0.0.1",
         "dialect": "mysql"
     },
  

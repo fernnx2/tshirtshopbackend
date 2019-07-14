@@ -1,4 +1,5 @@
 module.exports = (sequelize, Sequelize)=>{
+    'use strict';
     var product = sequelize.define('product',{
         product_id:{
             type:Sequelize.INTEGER,
@@ -39,6 +40,8 @@ module.exports = (sequelize, Sequelize)=>{
         }
     },{
         timestamp:false,
+        createdAt:false,
+        updatedAt:false,
         tableName:'product',
         engine: 'MYISAM'
     });

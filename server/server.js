@@ -7,7 +7,7 @@ app.use(bodyParser.json());
 
 //models
 var models = require('../app/models');
-models.sequelize.sync().then(()=>{
+models.sequelize.authenticate().then(()=>{
     console.log("Database Conected!");
 }).catch((err)=>{
     console.log(err);
