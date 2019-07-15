@@ -40,6 +40,7 @@ app.use((req, res, next) => {
     res.status(500);
     res.json(Erro);
   });
+
   
 //Start server
 app.listen(app.get('port'),(err) =>{
