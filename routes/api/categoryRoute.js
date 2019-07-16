@@ -1,6 +1,6 @@
 let categoryResourceController = require('../../app/resources/categoryResourceController')
 let crc =new categoryResourceController();
-module.exports =async (app)=>{
+module.exports =(app)=>{
 
     //pagination
     app.get('/categories/pag/:pag',async (req,res,next)=>{
