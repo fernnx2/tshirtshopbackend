@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 var env = require('dotenv');
 const app = express();
 const morgan = require('morgan');
-const logger = require('winston')
+const logger = require('winston');
+const cors = require('cors');
+
 
 //my depends
 const NotFaund = require('../util/NotFound');
@@ -14,9 +16,10 @@ const Erro = require('../util/Error');
 
 //init properties server
 app.set('port',process.env.PORT || 3001);
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(morgan('common'));
-
+app.use(cors());
 //models
 var models = require('../app/models');
 models.sequelize.authenticate().then(()=>{
@@ -33,6 +36,7 @@ app.use((req, res, next) => {
     logger.info("Error: Route Not Faund");
     res.status(404).json(NotFaund);
   });
+  
 //Error Internal Server 500
   app.use( (err, req, res, next) => {
     logger.info("Error: Interenal Server Error \n" + err)

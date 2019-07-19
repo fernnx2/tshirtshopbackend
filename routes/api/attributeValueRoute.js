@@ -1,17 +1,10 @@
-let attributeValue = require('../../app/resources/attributeValueResourceController');
-let av = new attributeValue();
+let avrc = require('../../app/resources/attributeValueResourceController');
+
 
 module.exports = (app)=>{
 
-    app.get('/attributes/values/:attribute_id',async (req,res,nex)=>{
-        let attributeValues =await av.findByAttibuteId(req.params.attribute_id);
-        res.json(attributeValues);
-    });
-
-    app.get('/attributes/inProduct/:product_id',async (req,res,nex)=>{
-        let attributeValues =await av.findAttributeFromProductId(req.params.product_id);
-        res.json(attributeValues);
-    });
+    app.get('/attributes/values/:attribute_id',avrc.getAttributeValue);
+    app.get('/attributes/inProduct/:product_id',avrc.getProductAttribute);
 
 
 }

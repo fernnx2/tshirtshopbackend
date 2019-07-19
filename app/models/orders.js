@@ -6,11 +6,6 @@ module.exports = (sequelize, Sequelize)=>{
             primaryKey:true,
             autoIncrement:true
         },
-        name:{
-            type:Sequelize.DECIMAL(10,2),
-            allowNull:false,
-            defaultValue:0.00
-        },
         created_on:{
             type:Sequelize.DATE(6),
             allowNull:false

@@ -1,28 +1,16 @@
-let categoryResourceController = require('../../app/resources/categoryResourceController')
-let crc =new categoryResourceController();
+let crc = require('../../app/resources/categoryResourceController')
+
 module.exports =(app)=>{
 
     //pagination
-    app.get('/categories/pag/:pag',async (req,res,next)=>{
-        let categories =await crc.findAllPag(req.params.pag,null);
-        res.json(categories);
-    });
+    app.get('/categories/pag/:pag',crc.getCategories);
 
     //findById
-    app.get('/categories/:category_id',async (req,res,next)=>{
-        let categories =await crc.findById(req.params.category_id);
-        res.json(categories);
-    });
+    app.get('/categories/:category_id',crc.getCategory);
 
     //find categories from producId
-    app.get('/categories/inProduct/:productId',async (req,res,next)=>{
-        let categories =await crc.findByCategoryFromProduct(req.params.productId);
-        res.json(categories);
-    });
+    app.get('/categories/inProduct/:product_id',crc.getCategoriesInProduct);
 
     //find categories from departmentId
-    app.get('/categories/inDepartment/:departmentId',async (req,res,next)=>{
-        let categories =await crc.findCategoryByDepartment(req.params.departmentId);
-        res.json(categories);
-    });
+    app.get('/categories/inDepartment/:department_id',crc.getCategoriesInDepartment);
 }

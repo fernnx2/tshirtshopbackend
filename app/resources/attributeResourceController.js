@@ -1,27 +1,23 @@
-let models = require('../models/index')
+let attributeService = require('../services/attributeService')
+let as = new attributeService();
 
-class AttributeResourceController {
 
-    //method get findAllAttributes
-    async findAll(){
-        try{
-            let attributes =await models.attribute.findAll(); 
-            return await attributes;
-        }catch(err){
-            return await err;
-        }
+    exports.findAll = (req,res,next)=>{
+      as.findAll().then(attributes=>{
+          res.json(attributes);
+      }).catch(err=>{
+          res.json(err);
+      });
     }
 
-    //method get attribute findById
-    async findById(attributeId){
-        try{
-            let attribute = await models.attribute.findByPk(attributeId);
-            return attribute;
-        }catch(err){
-            return await err;
-        }
-    }
+    exports.findById = (req,res,next)=>{
+        as.findById(req.params.attribute_id).then(a=>{
+            res.json(a);
+        }).catch(err=>{
+            res.json(err);
+        });
+      }
 
-}
+  
 
-module.exports = AttributeResourceController;
+

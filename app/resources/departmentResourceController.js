@@ -1,33 +1,18 @@
-var models = require('../models/index');
-var error = require('../../util/Error')
+let departmentService = require('../services/departmentService');
+let ds = new departmentService();
 
-class DepartmentController  {
+exports.getDepartmens = (req,res,next)=>{
+    ds.findAll().then(departments =>{
+        res.json(departments);
+    }).catch(err=>{
+        res.json(err);
+    });
+}
 
-    async findAll(){
-        try{
-            let departments = await models.department.findAll();
-            return await departments;
-        }catch(err){
-            error.message = err;
-            return await error;
-        }
-    
-    }
-
-    async findById(department_id){
-        try{
-            let department = await models.department.findByPk(department_id);
-            return department
-        }catch(err){
-            error.message = err;
-            return await error;
-        }
-
-       
-    }
-
-} 
-
-
-
-module.exports = DepartmentController;
+exports.getDepartment = (req,res,next)=>{
+    ds.findById(req.params.deparment_id).then(department=>{
+        res.json(department);
+    }).catch(err=>{
+        res.json(err);
+    });
+}

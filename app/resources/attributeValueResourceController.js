@@ -1,29 +1,18 @@
-let models = require('../models/index')
+let attributeValueService = require('../services/attributeValueService');
+let avs = new attributeValueService();
 
-class AttributeValueResourceController {
-
-    async findByAttibuteId(attribute_id){
-        try{
-            let value =await models.sequelize.query('call catalog_get_attribute_values(:attributeId)',{
-                replacements:{attributeId:attribute_id} 
-            });
-            return await value;
-        }catch(err){
-            return await err
-        }
-    }
-
-    async findAttributeFromProductId(product_id){
-        try{
-            let values = await models.sequelize.query('call catalog_get_product_attributes(:productId);',{
-                replacements:{productId:product_id} 
-            });
-            return await values;
-        }catch(err){
-            return await err;
-        }
-    }
-
+exports.getAttributeValue = (req,res,next)=>{
+       avs.findByAttibuteId(req.params.attribute_id).then(attributeValue =>{
+           res.json(attributeValue);
+       }).catch(err=>{
+        res.status(500).json(err);
+       });  
 }
 
-module.exports = AttributeValueResourceController;
+exports.getProductAttribute = (req,res,next)=>{
+      avs.findAttributeFromProductId(req.params.product_id).then(attributeValue=>{
+        res.json(attributeValue);
+      }).catch(err=>{
+          res.status(500).json(err);
+      })
+}
