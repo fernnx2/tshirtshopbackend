@@ -1,32 +1,32 @@
-module.exports = (sequelize, Sequelize)=>{
-    var audit = sequelize.define('audit',{
-        audit_id:{
-            type:Sequelize.INTEGER,
-            allowNull:false,
-            primaryKey:true,
-            autoIncrement:true
+module.exports = (sequelize, Sequelize) => {
+    var audit = sequelize.define('audit', {
+        audit_id: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
         },
-        order_id:{
-            type:Sequelize.INTEGER,
-            allowNull:false,
+        order_id: {
+            type: Sequelize.INTEGER,
+            allowNull: false
         },
-        created_on:{
-            type:Sequelize.DATE(6),
-            allowNull:false
+        created_on: {
+            type: Sequelize.DATE(6),
+            allowNull: false
         },
-        message:{
-            type:Sequelize.TEXT,
-            allowNull:false
+        message: {
+            type: Sequelize.TEXT,
+            allowNull: false
         },
-        code:{
-            type:Sequelize.INTEGER,
-            allowNull:false
+        code: {
+            type: Sequelize.INTEGER,
+            allowNull: false
         }
-    },{
-        timestamp:false,
-        createdAt:false,
-        updatedAt:false,
-        tableName:'audit',
+    }, {
+        timestamp: false,
+        createdAt: false,
+        updatedAt: false,
+        tableName: 'audit',
         engine: 'MYISAM'
     })
     return audit;

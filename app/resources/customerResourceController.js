@@ -1,6 +1,6 @@
 let customerService = require('../services/customerService');
 let cs = new customerService();
-
+let error = require('../../util/Error');
 exports.updateCustomer = (req,res,next)=>{
     cs.updateCustomer(req.body).then(resp =>{
         res.json(resp);
@@ -10,24 +10,37 @@ exports.updateCustomer = (req,res,next)=>{
 }
 
 exports.getCustomer = (req,res,next)=>{
-    cs.findById(req.params.customer_id).then(customer =>{
+    cs.findById(req.body.payload.customer_id).then(customer =>{
         res.json(customer);
     }).catch(err=>{
-        Response.json(err);
+        res.json(err);
     })
 }
 
+
 exports.saveCustomer = (req,res,next)=>{
     cs.saveCustomer(req.body).then(resp=>{
-        res.json(resp);
+    let object = cs.createSessionToken(resp);
+    res.json(object);
     }).catch(err=>{
         res.json(err);
     })
 }
 
 exports.login = (req,res,next)=>{
-    cs.login(req.body).then(customer =>{
-       res.json(customer); 
+    cs.customerLogin(req.body).then(customer =>{
+        if(!customer || customer.password != req.body.password){
+            error.message = "Error in credentials the customer!";
+            res.json(error);
+        }
+        else{
+            cs.findById(customer.customer_id).then(resp=>{
+           
+                let object= cs.createSessionToken(resp);
+                res.json(object);
+               })
+        }
+       
     }).catch(err=>{
         res.json(err);
     });

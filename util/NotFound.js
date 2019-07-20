@@ -1,4 +1,4 @@
 module.exports = Notfaund = {
     message: "Error. Route not found",
-    status:404
+    status: 404
 }

@@ -1,41 +1,41 @@
-module.exports = (sequelize, Sequelize)=>{
-    var orders = sequelize.define('orders',{
-        order_id:{
-            type:Sequelize.INTEGER,
-            allowNull:false,
-            primaryKey:true,
-            autoIncrement:true
+module.exports = (sequelize, Sequelize) => {
+    var orders = sequelize.define('orders', {
+        order_id: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            primaryKey: true,
+            autoIncrement: true
         },
-        created_on:{
-            type:Sequelize.DATE(6),
-            allowNull:false
+        created_on: {
+            type: Sequelize.DATE(6),
+            allowNull: false
         },
-        shipped_on:{
-            type:Sequelize.DATE(6),
+        shipped_on: {
+            type: Sequelize.DATE(6)
         },
-        comments:{
-            type:Sequelize.STRING,
+        comments: {
+            type: Sequelize.STRING
         },
-        customer_id:{
-            type:Sequelize.INTEGER,
+        customer_id: {
+            type: Sequelize.INTEGER
         },
-        auth_code:{
-            type:Sequelize.STRING(50),
+        auth_code: {
+            type: Sequelize.STRING(50)
         },
-        reference:{
-            type:Sequelize.STRING(50),
+        reference: {
+            type: Sequelize.STRING(50)
         },
-        shipping_id:{
-            type:Sequelize.INTEGER,
+        shipping_id: {
+            type: Sequelize.INTEGER
         },
-        tax_id:{
-            type:Sequelize.INTEGER,
+        tax_id: {
+            type: Sequelize.INTEGER
         }
-    },{
-        timestamp:false,
-        createdAt:false,
-        updatedAt:false,
-        tableName:'orders',
+    }, {
+        timestamp: false,
+        createdAt: false,
+        updatedAt: false,
+        tableName: 'orders',
         engine: 'MYISAM'
     });
     return orders;

@@ -15,7 +15,7 @@ const NotFaund = require('../util/NotFound');
 const Erro = require('../util/Error');
 
 //init properties server
-app.set('port',process.env.PORT || 3001);
+app.set('port',process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(morgan('common'));
@@ -28,6 +28,12 @@ models.sequelize.authenticate().then(()=>{
     console.log(err);
 });
 
+//middleware
+let auth = require('../app/middlewares/authentication');
+let customerValidation = require('../app/middlewares/customerValidation');
+app.use(auth);
+app.use(customerValidation);
+
 //routes
 require('../routes/api/indexRoute')(app);
 
@@ -39,10 +45,9 @@ app.use((req, res, next) => {
   
 //Error Internal Server 500
   app.use( (err, req, res, next) => {
-    logger.info("Error: Interenal Server Error \n" + err)
-    Erro.message = err;
-    res.status(500);
-    res.json(Erro);
+    Erro.message = err.message;
+    logger.info(Erro);
+    res.status(500).json(Erro);
   });
 
   
