@@ -75,12 +75,12 @@ class ProductService {
     }
 
     //save product review
-     saveProductReview(id,product){
+     saveProductReview(id,body){
         return models.sequelize.query('call catalog_create_product_review(:customerId, :productId,:review ,:rating)',{
-                replacements:{customerId:product.customer_id,
+                replacements:{customerId:body.payload.customer_id,
                               productId:id,
-                              review:product.review,
-                              rating:product.rating                
+                              review:body.review,
+                              rating:body.rating                
                 }
             });
     }

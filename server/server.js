@@ -28,11 +28,6 @@ models.sequelize.authenticate().then(()=>{
     console.log(err);
 });
 
-//middleware
-let auth = require('../app/middlewares/authentication');
-let customerValidation = require('../app/middlewares/customerValidation');
-app.use(auth);
-app.use(customerValidation);
 
 //routes
 require('../routes/api/indexRoute')(app);

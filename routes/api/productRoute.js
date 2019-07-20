@@ -1,5 +1,5 @@
 var prc = require('../../app/resources/productResourceController');
-
+const auth = require('../../app/middlewares/authentication');
 module.exports = (app)=>{
 
     app.get('/products/',prc.getProducts);
@@ -18,7 +18,7 @@ module.exports = (app)=>{
     
     app.get('/products/:product_id/reviews',prc.getProducReviews);
 
-    app.post('/products/:product_id/reviews',prc.seveProducReviews);
+    app.post('/products/:product_id/reviews',auth,prc.saveProducReviews);
     
 
 

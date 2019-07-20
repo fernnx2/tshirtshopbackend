@@ -3,7 +3,11 @@ let cs = new customerService();
 let error = require('../../util/Error');
 exports.updateCustomer = (req,res,next)=>{
     cs.updateCustomer(req.body).then(resp =>{
-        res.json(resp);
+        cs.findById(req.body.payload.customer_id).then(customer=>{
+            res.json(customer);
+        }).catch(err=>{
+            res.status(400).send(err);
+        });
     }).catch(err=>{
         res.json(err);
     })
@@ -48,9 +52,13 @@ exports.login = (req,res,next)=>{
 
 exports.updateCustomerAddress = (req,res,next)=>{
     cs.updateCustomerAddress(req.body).then(address=>{
-        res.json(address);
+        cs.findById(req.body.payload.customer_id).then(customer=>{
+            res.json(customer);
+        }).catch(err=>{
+            res.status(400).send(err);
+        })
     }).catch(err=>{
-        res.json(err);
+        res.status(400).json(err);
     });
 }
 

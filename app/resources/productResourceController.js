@@ -72,7 +72,10 @@ exports.getProducReviews = (req,res,next)=>{
     })
 }
 
-exports.seveProducReviews = (req,res,next)=>{
+
+exports.saveProducReviews = (req,res,next)=>{
+    console.log(req);
+
         ps.saveProductReview(req.params.product_id,req.body).then(product=>{
             res.json(product);
         }).catch(err=>{

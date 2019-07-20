@@ -3,7 +3,6 @@ let CONFIG = require('../../config/config');
 let unauthorized = require('../../util/Unauthorized');
 module.exports = (req, res, next) => {
 
-    if (autherizationRoute(req, routes)) {
         if (req.headers.authorization) {
             let token = req
                 .headers
@@ -15,9 +14,7 @@ module.exports = (req, res, next) => {
                         .status(500)
                         .send(error);
                 } else {
-                    req.body = {
-                        payload: decoded
-                    };
+                    req.body.payload =decoded;
                     next()
                 }
 
@@ -27,21 +24,3 @@ module.exports = (req, res, next) => {
                 .status(403)
                 .send(unauthorized);
         }
-    else 
-        next();
-    }
-
-var routes = [
-    [
-        "/customer", "GET"
-    ],
-    ["/categories/pag", "GET"]
-]
-
-function autherizationRoute(req, route) {
-    for (let x = 0; x < route.length; x++) {
-        if (req.path.includes(route[x][0]) && req.method == route[x][1]) 
-            return true;
-        }
-    return false;
-}

@@ -33,16 +33,19 @@ class CustomerService {
     //put
     updateCustomer(customer) {
         return models
-            .customer
-            .update(customer, {
-                where: {
-                    customer_id: customer.customer_id
+            .sequelize.query('call customer_update_account(:id,:name,:email,:password,:day_phone,:eve_phone,:mob_phone)',{
+                replacements:{
+                    id:customer.payload.customer_id,
+                    name:customer.name,
+                    email: customer.email,
+                    password:customer.password,
+                    day_phone:customer.day_phone,
+                    eve_phone:customer.eve_phone,
+                    mob_phone:customer.mob_phone
                 }
             })
             .then(resp => {
-                if (resp) {
-                    return this.findById(customer.customer_id);
-                }
+                return resp;
             })
             .catch(err => {
                 return err;
@@ -62,20 +65,19 @@ class CustomerService {
 
     //update customer address
     updateCustomerAddress(customerAddress) {
-
+        console.log(customerAddress);
         return models
             .sequelize
-            .query('call customer_update_address(:customerId,:address1,:address2,:city,:region,:post' +
-                    'alCode,:country,:shippingRegionId)', {
+            .query('call customer_update_address(:customerId,:address1,:address2,:city,:region,:postalCode,:country,:shippingRegionId)', {
                 replacements: {
-                    customerId: customerAddress.customer_id,
+                    customerId: customerAddress.payload.customer_id,
                     address1: customerAddress.address_1,
                     address2: customerAddress.address_2,
                     city: customerAddress.city,
                     region: customerAddress.region,
                     postalCode: customerAddress.postal_code,
-                    coutry: customerAddress.coutry,
-                    shippingRegionId: customerAddress.shipping_region_id
+                    country: customerAddress.country,
+                    shippingRegionId: Number(customerAddress.shipping_region_id)
                 }
             });
     }
