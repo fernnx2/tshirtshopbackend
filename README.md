@@ -1,10 +1,27 @@
 
-##Api tshirtShop
+  
 
-## install
+# Api tshirtShop
+
+  
+
+### install
 
     npm install
 
-## run
+### run dev
 
-    node server/server.js
+    npm run dev
+
+### run
+
+	npm start
+  
+
+### Estruct proyect
+
+ - App
+ - config
+ - routes
+ - server
+ - util
