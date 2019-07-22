@@ -15,11 +15,16 @@ const NotFaund = require('../util/NotFound');
 const Erro = require('../util/Error');
 
 //init properties server
+app.use(express.static('public'));
+
+
 app.set('port',process.env.PORT || 3000);
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use(cors());
+
+
 //models
 var models = require('../app/models');
 models.sequelize.authenticate().then(()=>{
