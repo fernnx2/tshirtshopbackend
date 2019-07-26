@@ -2,18 +2,9 @@ var models = require('../models/index')
 
 class ProductService {
 
-     //page initial
-     findStart(off,lim){
-        let offsett=0,limitt=20; //default values
-        if(off !=null || lim != null){
-            offsett=off; //set offset
-            limitt=lim;  //set limit
-        }
-        return models.product.findAll({limit:limitt,offset:offsett}); //query get products       
-    }
-
     //pagination for 20
-    findAllPag(length,lim,offs) {
+    findAllPag(length=200,lim=10,pag=1) {
+	let offs=(pag-1)*lim;
        return  models.sequelize.query('call catalog_get_products_on_catalog(:description_length, :limit, :offset)',{
            replacements:{
                description_length:length,
