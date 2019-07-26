@@ -26,7 +26,7 @@
  - server
  - util
 
-### En la carpeta app esta la logica de el aplicativo estructurada en 4 partes 
+### In the app folder is the logic of the application structured in four parts 
 
  - Models
  - Services
